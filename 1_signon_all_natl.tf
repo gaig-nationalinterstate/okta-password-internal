@@ -24,5 +24,5 @@ resource "okta_policy_rule_signon" "force-multifactor" {
   session_lifetime    = "1440"
   session_persistent  = "false"
   status              = "ACTIVE"
-  users_excluded      = [data.okta_user.box-sd.id]
+  users_excluded      = [var.env == "prd" ? data.okta_user.box-sd[0].id : ""]
 }
