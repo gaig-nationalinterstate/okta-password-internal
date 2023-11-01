@@ -1,10 +1,5 @@
 terraform {
-  cloud {
-    organization = "natl-vsphere"
-    workspaces {
-      name = "okta-password-internal-nonprd"
-    }
-  }
+  
   required_providers {
     okta = {
       source  = "okta/okta"
