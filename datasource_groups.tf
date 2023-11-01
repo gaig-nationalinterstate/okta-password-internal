@@ -1,4 +1,4 @@
-# Data source to the "Everyone" group. This ensures we grab correct group ID per environment
+# Data source to existing groups. This is to grab the existing id's. 
 data "okta_group" "everyone" {
   name = "Everyone"
 }

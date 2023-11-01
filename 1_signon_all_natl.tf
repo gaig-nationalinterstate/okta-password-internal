@@ -6,7 +6,8 @@ resource "okta_policy_signon" "natl-employees" {
   status          = "ACTIVE"
 }
 
-resource "okta_policy_rule_signon" "force-multifactor" {
+resource "okta_policy_rule_signon" "force-multifactor-prd" {
+  count               = var.env == "prd" ? 1 : 0
   access              = "ALLOW"
   authtype            = "ANY"
   identity_provider   = "ANY"
@@ -24,5 +25,26 @@ resource "okta_policy_rule_signon" "force-multifactor" {
   session_lifetime    = "1440"
   session_persistent  = "false"
   status              = "ACTIVE"
-  users_excluded      = [data.okta_user.box-sd.id]
+  users_excluded      = [data.okta_user.box-sd[0].id]
+}
+
+resource "okta_policy_rule_signon" "force-multifactor-nonprd" {
+  count               = var.env == "nonprd" ? 1 : 0
+  access              = "ALLOW"
+  authtype            = "ANY"
+  identity_provider   = "ANY"
+  mfa_lifetime        = "1440"
+  mfa_prompt          = "SESSION"
+  mfa_remember_device = "false"
+  mfa_required        = "true"
+  name                = "Force multifactor"
+  network_connection  = "ANYWHERE"
+  policy_id           = okta_policy_signon.natl-employees.id
+  primary_factor      = "PASSWORD_IDP"
+  priority            = "1"
+  risc_level          = "ANY"
+  session_idle        = "720"
+  session_lifetime    = "1440"
+  session_persistent  = "false"
+  status              = "ACTIVE"
 }
