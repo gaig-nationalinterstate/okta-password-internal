@@ -6,8 +6,7 @@ resource "okta_policy_signon" "default-policy" {
   status          = "ACTIVE"
 }
 
-resource "okta_policy_rule_signon" "force-multifactor-prd" {
-  count               = var.env == "prd" ? 1 : 0
+resource "okta_policy_rule_signon" "force-multifactor-all" {
   access              = "ALLOW"
   authtype            = "ANY"
   identity_provider   = "ANY"
