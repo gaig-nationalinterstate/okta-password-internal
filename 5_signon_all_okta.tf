@@ -6,7 +6,7 @@ resource "okta_policy_signon" "okta-all" {
   status          = "ACTIVE"
 }
 
-resource "okta_policy_rule_signon" "force-multifactor-prd" {
+resource "okta_policy_rule_signon" "force-multifactor-all-okta-prd" {
   count               = var.env == "prd" ? 1 : 0
   access              = "ALLOW"
   authtype            = "ANY"
@@ -28,7 +28,7 @@ resource "okta_policy_rule_signon" "force-multifactor-prd" {
   users_excluded      = [data.okta_user.box-sd[0].id]
 }
 
-resource "okta_policy_rule_signon" "force-multifactor-nonprd" {
+resource "okta_policy_rule_signon" "force-multifactor-all-okta-nonprd" {
   count               = var.env == "nonprd" ? 1 : 0
   access              = "ALLOW"
   authtype            = "ANY"
