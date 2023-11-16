@@ -20,9 +20,9 @@ resource "okta_policy_password" "default-password-policy" {
   password_show_lockout_failures = "false"
   question_min_length            = "4"
   question_recovery              = "ACTIVE"
-  recovery_email_token           = "60"
+  recovery_email_token           = "30"
   skip_unlock                    = "false"
-  sms_recovery                   = "INACTIVE"
+  sms_recovery                   = "ACTIVE"
 }
 
 resource "okta_policy_rule_password" "default-password-rule" {

@@ -25,7 +25,7 @@ resource "okta_policy_password" "active-directory-policy" {
   priority                               = "2"
   question_min_length                    = "4"
   question_recovery                      = "ACTIVE"
-  recovery_email_token                   = "1440"
+  recovery_email_token                   = "60"
   skip_unlock                            = "false"
   sms_recovery                           = "ACTIVE"
   status                                 = "ACTIVE"
