@@ -6,6 +6,26 @@ resource "okta_policy_signon" "default-policy" {
   status          = "ACTIVE"
 }
 
+resource "okta_policy_rule_signon" "force-multifactor-all" {
+  access              = "ALLOW"
+  authtype            = "ANY"
+  identity_provider   = "ANY"
+  mfa_lifetime        = "1440"
+  mfa_prompt          = "SESSION"
+  mfa_remember_device = "false"
+  mfa_required        = "true"
+  name                = "Force multifactor"
+  network_connection  = "ANYWHERE"
+  policy_id           = okta_policy_signon.default-policy.id
+  primary_factor      = "PASSWORD_IDP"
+  priority            = "1"
+  risc_level          = "ANY"
+  session_idle        = "720"
+  session_lifetime    = "1440"
+  session_persistent  = "false"
+  status              = "ACTIVE"
+}
+
 resource "okta_policy_rule_signon" "default-rule" {
   access              = "ALLOW"
   authtype            = "ANY"
@@ -18,7 +38,7 @@ resource "okta_policy_rule_signon" "default-rule" {
   network_connection  = "ANYWHERE"
   policy_id           = okta_policy_signon.default-policy.id
   primary_factor      = "PASSWORD_IDP"
-  priority            = "1"
+  priority            = "2"
   session_idle        = "120"
   session_lifetime    = "0"
   session_persistent  = "false"
