@@ -1,6 +1,6 @@
 resource "okta_policy_signon" "okta-all" {
   description     = "Multifactor required for all Okta accounts"
-  groups_included = [data.okta_group.domain-users.id]
+  groups_included = [data.okta_group.everyone.id]
   name            = "Multifactor for all Okta accounts"
   priority        = "4"
   status          = "ACTIVE"
